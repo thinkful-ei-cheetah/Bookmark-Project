@@ -1,0 +1,66 @@
+*{
+  box-sizing: border-box;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+h1{
+  text-align: center;
+}
+
+form{
+  width: 300px;
+  text-align:center;
+  margin: 0 auto;
+}
+
+#search-box{
+  padding-left: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 320px;
+  font-size: 30px;
+}
+
+.search-btn{
+  display: block;
+  margin: 10px auto;
+}
+#search-box:focus{
+  border: 2px solid black;
+}
+
+.logo-info{
+  position: absolute;
+  bottom: 0px;
+  right: 20px;
+  color: grey;
+}
+
+.bookmark-container{
+  margin-top: 100px;
+  border-top: 1px solid rgb(211,211,211);
+  padding:30px;
+
+}
+
+.bookmark{
+  border: 1px solid black;
+  height: 300px;
+  width: 250px;
+  box-shadow: 2px 2px grey;
+  border-radius: 5px;
+}
+
+.logo-container{
+  text-align: center;
+}
+
+img{
+  border-bottom: 1px solid black;
+  padding: 10px 0px;
+}
+
+.mini-info{
+  text-align: center;
+}
+
+
