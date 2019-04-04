@@ -36,11 +36,12 @@ form{
 }
 
 .bookmark-container{
-  margin-top: 100px;
+  margin: 100px auto 0 auto;
   border-top: 1px solid rgb(211,211,211);
   padding:30px;
   display: flex;
   flex-wrap: wrap;
+  max-width: 1200px;
 
 
 }
@@ -62,47 +63,6 @@ form{
 .logo{
   border-bottom: 1px solid black;
   padding: 10px 0px;
-}
-
-.js-mini-info{
-  text-align: center;
-}
-
-.js-bookmark-large{
-  width: 350px;
-  padding: 10px;
- 
-}
-
-.js-logo-container-large{
-  text-align: left;
-}
-
-.js-logo-large{
-  border: none;
-  padding: 0px 0px;
-}
-
-.js-large-info{
-  margin-left: 20px;
-}
-
-.js-name-large{
-  margin: 0px 0px;
-}
-
-.js-small-to-large-large{
-  display: flex;
-}
-
-.fa-trash{
-  margin-top: 10px;
-  margin-left: 110px;
-}
-
-.go-btn{
-
-  text-align: right;
 }
 
 

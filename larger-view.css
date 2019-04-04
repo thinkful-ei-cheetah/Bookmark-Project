@@ -1,0 +1,58 @@
+
+.js-mini-info{
+  text-align: center;
+}
+
+.js-bookmark-large{
+  width: 350px;
+  padding: 10px;
+ 
+}
+
+.js-logo-container-large{
+  text-align: left;
+}
+
+.js-logo-large{
+  border: none;
+  padding: 0px 0px;
+}
+
+.js-large-info{
+  margin-left: 20px;
+}
+
+.js-name-large{
+  margin: 0px 0px;
+}
+
+.js-small-to-large-large{
+  display: flex;
+}
+
+.fa-trash{
+  margin-top: 10px;
+  margin-left: 110px;
+}
+
+.go-btn{
+  text-align: right;
+}
+
+.description-text{
+  height: 76px;
+  word-wrap: break-word
+}
+
+.additional-info{
+  height: 200px;
+  width: 328px;
+}
+
+.url-text{
+  height: 60px;
+  width: 328px;
+  word-wrap: break-word
+}
+
+
