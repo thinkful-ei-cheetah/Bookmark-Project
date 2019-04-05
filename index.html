@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="form.css">
     <link rel="stylesheet" href="larger-view.css">
 
     <!-- fontawesome -->
@@ -18,11 +19,50 @@
     <header role="banner">
       <h1>Bookmark Mananger</h1>
     </header>
-    <form role="form">
+
+    <form class ="search" role="form">
       <input type="text" role="searchbox" name="search-box" placeholder="Search..." id="search-box">
+      <div class="show-error"></div>
+      <button class="add-item">+ Add Bookmark</button>
     </form>
-    <a class="logo-info" href="https://clearbit.com">Logos provided by Clearbit</a>
+
+
+    <div class="add-form-container">
+      <form class="add-bookmark" role="form">
+        <i class="far fa-window-close fa-2x"></i>
+        <label for="url-entry">URL</label>
+        <br>
+        <input type= "text" class="url-entry" placeholder="www....">
+        <br>
+        <label for="rating-box"></label>
+        <br>
+        <div class="rating-box" id="rating">
+          <span class="star-rating">
+            <i class="fas fa-star star-selected"></i>
+            <i class="fas fa-star star-selected"></i>
+            <i class="fas fa-star star-selected"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </span>
+        </div> 
+        <div class="additional-info-form">
+            <label for="text-entry"></label>
+            <br>
+            <input aria-label="Title" type= "text" class="title-entry" placeholder="Title..." maxlength="22">
+            <br>
+            <textarea class="add-bookmark-textArea" maxlength="190" rows="5" name="description" placeholder="This webiste is for..." cols="35"></textarea>
+        </div>
+        <div class="go-btn">
+          <button><a  href="#"><i class="add-new-item-btn fas fa-arrow-right fa-3x"></i></a></button>
+        </div>
+      </form>  
+    </div>
+
+    
+   
+
     <section role="list" class= "bookmark-container">
+
       <div class="  bookmark" id="a30dk5d" role="listitem">
         <div class="small-to-large">
           <div class="logo-container">
@@ -41,13 +81,16 @@
         </div>
       </div>
 
-      <div class=" js-bookmark-large bookmark" id="b30dk5d" role="listitem">
-        <div class="js-small-to-large-large">
-          <div class="logo-container js-logo-container-large">
-            <img class="logo js-logo-large" src="https://placedog.net/60/60" alt="logo">
+
+      
+      
+    <div class="bookmark" id="c30dk5d" role="listitem">
+        <div class="small-to-large">
+          <div class="logo-container">
+            <img class= "logo" src="https://placedog.net/170/170" alt="logo">
           </div>
-          <div class="js-large-info">
-            <h4 class="js-name-large">Spotify</h4>
+          <div class="js-mini-info">
+            <h4 class="name">Spotify</h4>
             <span class="star-rating">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -56,50 +99,51 @@
               <i class="fas fa-star"></i>
             </span>
           </div>
-          <i class="fas fa-trash fa-lg"></i>
         </div>
-        <div class="additional-info">
-          <div class="description-text">
-            <p>ipsfffffs</p>
-          </div>
-          <div class="url-text">
-            <p>ipxxxxxxxxxxxxxxxxxs</p>
-          </div>
-
-          <div class="go-btn"><a  href="#"><i class="fas fa-arrow-circle-right fa-3x"></i>
-
-          </a></div>
-          
-        </div>
-        
       </div>
-      
-      
-      <div class="bookmark" id="c30dk5d" role="listitem">
-          <div class="small-to-large">
-            <div class="logo-container">
-              <img class= "logo" src="https://placedog.net/170/170" alt="logo">
-            </div>
-            <div class="js-mini-info">
-              <h4 class="name">Spotify</h4>
-              <span class="star-rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </span>
-            </div>
-          </div>
-        </div>
 
-        
+    <a class="logo-info" href="https://clearbit.com">Logos provided by Clearbit</a>  
     </section>
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-  <script type="text/javascript" src="Store.js"></script>
-  <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="BookmarkController.js"></script>
+    <script type="text/javascript" src="bookmarkAPI.js"></script>
+    <script type="text/javascript" src="Store.js"></script>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
+<!-- 
+<div class=" js-bookmark-large bookmark" id="b30dk5d" role="listitem">
+    <div class="js-small-to-large-large">
+      <div class="logo-container js-logo-container-large">
+        <img class="logo js-logo-large" src="https://placedog.net/60/60" alt="logo">
+      </div>
+      <div class="js-large-info">
+        <h4 class="js-name-large">Spotify</h4>
+        <span class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </span>
+      </div>
+      <i class="fas fa-trash fa-lg"></i>
+    </div>
+    <div class="additional-info">
+      <div class="description-text">
+        <p>ipsfffffs</p>
+      </div>
+      <div class="url-text">
+        <p>ipxxxxxxxxxxxxxxxxxs</p>
+      </div>
+
+      <div class="go-btn"><a  href="#"><i class="fas fa-arrow-circle-right fa-3x"></i>
+
+      </a></div>
+      
+    </div>
+    
+  </div> -->

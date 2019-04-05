@@ -6,7 +6,7 @@ h1{
   text-align: center;
 }
 
-form{
+.search{
   width: 300px;
   text-align:center;
   margin: 0 auto;
@@ -29,10 +29,7 @@ form{
 }
 
 .logo-info{
-  position: absolute;
-  bottom: 0px;
-  right: 20px;
-  color: grey;
+    color: grey;
 }
 
 .bookmark-container{
@@ -63,6 +60,38 @@ form{
 .logo{
   border-bottom: 1px solid black;
   padding: 10px 0px;
+  max-width: 130px
 }
 
+.add-item{
+  padding: 15px 20px 15px 20px;
+  margin-top: 15px;
+  font-size: 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 2px 2px grey;
+  cursor: pointer;
+  top: 120px;
+}
 
+.add-item:hover{
+  color:blue;
+}
+.add-item:active{
+  box-shadow: none;
+}
+
+.star-selected{
+  color: orange;
+}
+
+.show-error{
+  position: fixed;
+  margin: auto;
+  top:0px;
+  left: 20px;
+  color: red;
+  margin-top: 10px;
+  max-width: 400px;
+}

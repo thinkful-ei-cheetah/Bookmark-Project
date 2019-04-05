@@ -24,15 +24,22 @@
 
 .js-name-large{
   margin: 0px 0px;
+  text-align: left;
 }
 
 .js-small-to-large-large{
   display: flex;
+  height: 60px;
 }
 
 .fa-trash{
   margin-top: 10px;
-  margin-left: 110px;
+  margin-left: 70px;
+}
+
+.fa-pencil-alt{
+  margin-top: 10px;
+  margin-left:10px;
 }
 
 .go-btn{
@@ -40,7 +47,7 @@
 }
 
 .description-text{
-  height: 76px;
+  height: 100px;
   word-wrap: break-word
 }
 
@@ -50,9 +57,14 @@
 }
 
 .url-text{
-  height: 60px;
+  height: 30px;
   width: 328px;
+  margin-top: 25px;
+  margin-bottom: 0px;
   word-wrap: break-word
 }
 
+.interact-btns{
+  display: flex;
+}
 
