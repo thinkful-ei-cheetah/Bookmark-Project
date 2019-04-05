@@ -8,8 +8,9 @@ $(init);
 //INITIALZE HANDLERS AND GRAB BOOKMARKS FROM SERVER
 function init(){
   BookmarkController.initializeHandlers();
+
   API.getBookmarks()
-    .then(bookmarks => { 
+    .then(bookmarks => {
       bookmarks.forEach(bookmark => Store.addBookmark(bookmark));
       BookmarkController.render();
     })

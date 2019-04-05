@@ -11,12 +11,14 @@ const Store = (function (){
     },
   ];
   let searchTerm = '';
+  let ratingFilter = null;
 
   const findBookmarkDetails = function (id){
     return this.bookmarks.find(item => item.id === id);
   };
 
   const addBookmark = function(newBookmark){
+    console.log(newBookmark)
     Store.bookmarks.unshift(newBookmark);
   };
 
@@ -24,13 +26,20 @@ const Store = (function (){
     Store.searchTerm = term;
   };
 
+  const setRatingFilter = function (value){
+    Store.ratingFilter = value;
+  };
+
+  let isExpanded = null
+
   return{
     bookmarks,
     findBookmarkDetails,
     addBookmark,
     setSearchTerm,
     searchTerm,
-
+    setRatingFilter,
+    ratingFilter,
   };
 }() );
 

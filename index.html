@@ -50,7 +50,7 @@
             <br>
             <input aria-label="Title" type= "text" class="title-entry" placeholder="Title..." maxlength="22">
             <br>
-            <textarea class="add-bookmark-textArea" maxlength="190" rows="5" name="description" placeholder="This webiste is for..." cols="35"></textarea>
+            <textarea class="add-bookmark-textArea" maxlength="130" rows="5" name="description" placeholder="This webiste is for..." cols="35"></textarea>
         </div>
         <div class="go-btn">
           <button><a  href="#"><i class="add-new-item-btn fas fa-arrow-right fa-3x"></i></a></button>
@@ -58,52 +58,20 @@
       </form>  
     </div>
 
-    
-   
-
+    <div class="filter-rating">
+      <label for="filter-ratings">Filter By:</label>
+      <select name="filter-ratings" id="filter-ratings">
+        <option value="">⭐+</option>
+        <option value="2">⭐⭐+</option>
+        <option value="3">⭐⭐⭐+</option>
+        <option value="4">⭐⭐⭐⭐+</option>
+        <option value="5">⭐⭐⭐⭐⭐</option>
+      </select>
+    </div>
     <section role="list" class= "bookmark-container">
-
-      <div class="  bookmark" id="a30dk5d" role="listitem">
-        <div class="small-to-large">
-          <div class="logo-container">
-            <img class= "logo" src="https://placedog.net/170/170" alt="logo">
-          </div>
-          <div class="js-mini-info">
-            <h4 class="name">Spotify</h4>
-            <span class="star-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-
-
-      
-      
-    <div class="bookmark" id="c30dk5d" role="listitem">
-        <div class="small-to-large">
-          <div class="logo-container">
-            <img class= "logo" src="https://placedog.net/170/170" alt="logo">
-          </div>
-          <div class="js-mini-info">
-            <h4 class="name">Spotify</h4>
-            <span class="star-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-
-    <a class="logo-info" href="https://clearbit.com">Logos provided by Clearbit</a>  
     </section>
+
+    <a class="logo-info" href="https://clearbit.com">Logos provided by Clearbit</a>
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

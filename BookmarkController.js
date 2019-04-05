@@ -8,11 +8,14 @@ const BookmarkController = (function(){
     handleSubmit();
     handleAddButtonClicked();
     handleExitFormClicked();
-    handleSearching()
+    handleSearching();
+    handleFilterRatings()
   };
 
 
-  //eventListeners
+  //EVENT LISTENERS
+
+  //Form submission sotre variables, validate, APIcreateBookmark, add to store, rerender
   const handleSubmit = function(){
     $('.add-bookmark').submit( (e)=>{
       e.preventDefault();
@@ -23,6 +26,7 @@ const BookmarkController = (function(){
       const rating = null;
   
       try{
+       
         const JSONObj = validateForm(enteredURL, enteredTitle, enteredDes, rating);
         exitForm();
         API.createBookmark(JSONObj)
@@ -48,9 +52,10 @@ const BookmarkController = (function(){
     $('.add-bookmark').css('display', 'none');
   }
 
-  // Display the  add bookmark form
+  // Display the add bookmark form
   const handleAddButtonClicked = function(){
     $('.add-item').click( function(e) {
+      e.preventDefault(); 
       $('.add-bookmark').css('display','block');  
     });
   };
@@ -66,6 +71,14 @@ const BookmarkController = (function(){
         minimize(unselected);
       }
       
+    });
+  };
+
+  const handleFilterRatings = function(){
+    $('#filter-ratings').change(e=>{
+      const value = $( '#filter-ratings option:selected').val();
+      Store.setRatingFilter(value);
+      BookmarkController.render();
     });
   };
 
@@ -145,12 +158,9 @@ const BookmarkController = (function(){
     const longVersion = `  
     <div class="additional-info">
       <div class="description-text">
-        <p>${bookmarkDetails.description}</p>
+        <p>${bookmarkDetails.desc}</p>
       </div>
-      <div class="url-text">
-        <p>${bookmarkDetails.url}</p>
-      </div>
-      <div class="go-btn"><a  href="#"><i class="fas fa-arrow-circle-right fa-3x"></i></a>
+      <div class="go-btn"><a  href="${bookmarkDetails.url}"><i class="fas fa-arrow-circle-right fa-3x"></i></a>
       </div>
     </div>`;
   
@@ -160,7 +170,6 @@ const BookmarkController = (function(){
   //Input validation
   const validateForm = function(enteredURL, enteredTitle, enteredDes, rating){
     const regex = RegExp('^https?://');
-    console.log(enteredURL);
     if (!regex.test(enteredURL)) throw new Error('Please begin your URL with https:// or http://');
     if (enteredTitle < 1) throw new Error('Please check your bookmark entry and ensure the title is valid');
 
@@ -182,6 +191,10 @@ const BookmarkController = (function(){
   const render = function(){
     let bookmarks = [...Store.bookmarks];
 
+    if (Store.ratingFilter){
+      bookmarks = bookmarks.filter( bookmark => bookmark.rating >= Store.ratingFilter);
+    }
+
     if(Store.searchTerm){
       bookmarks = bookmarks.filter( bookmark => bookmark.title.toLowerCase().includes(Store.searchTerm.toLowerCase()));
     }
@@ -190,15 +203,16 @@ const BookmarkController = (function(){
   };
 
   const createBookmarkString = function (bookmarkArray){
-    let htmlString =bookmarkArray.map( bookmark => generateBookmarkHTML(bookmark));
+    let htmlString =bookmarkArray.map( (bookmark,index) => generateBookmarkHTML(bookmark, index));
+  
     return htmlString.join('');
 
   };
 
-  const generateBookmarkHTML = function (bookmark){
+  const generateBookmarkHTML = function (bookmark, index){
     let imgURL = bookmark.url.match(/[\w]*\.com|[\w]*\.edu|[\w]*\.org|[\w]*\.io|[\w]*\.it|[\w]*\.br|[\w]*\.ca|[\w]*\.net|[\w]*\.co\.uk/);
     console.log(imgURL);
-    return `<div class="bookmark" id="${bookmark.id}" role="listitem">
+    return `<div class="bookmark" id="${bookmark.id}" role="listitem" tabIndex = "0">
     <div class="small-to-large">
       <div class="logo-container">
         <img class= "logo" src="//logo.clearbit.com/${imgURL[0]}" onerror="if (this.src != 'error.jpg') this.src = 'https://placedog.net/170/170'" alt="logo">
@@ -229,3 +243,4 @@ const BookmarkController = (function(){
     render
   };
 }() );
+

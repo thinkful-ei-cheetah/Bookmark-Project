@@ -30,6 +30,8 @@ h1{
 
 .logo-info{
     color: grey;
+    position: fixed;
+    bottom: 0px;
 }
 
 .bookmark-container{
@@ -39,8 +41,6 @@ h1{
   display: flex;
   flex-wrap: wrap;
   max-width: 1200px;
-
-
 }
 
 .bookmark{
@@ -94,4 +94,9 @@ h1{
   color: red;
   margin-top: 10px;
   max-width: 400px;
+}
+
+.filter-rating{
+  text-align: center;
+  margin-top: 15px;
 }

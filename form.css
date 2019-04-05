@@ -7,7 +7,11 @@
   width: 200px;
 }
 
-
+.add-bookmark > label{
+  position: relative;
+  left: -20px;
+  top: -15px;
+}
 
 textarea{
   resize: none;
@@ -21,7 +25,7 @@ textarea{
 }
 .add-bookmark{
 margin: 0 auto;
-  width: 30%;
+  max-width: 350px;
   margin: 0 auto;
   border: 2px solid black;
   background-color: white;
@@ -33,7 +37,7 @@ margin: 0 auto;
 
 .fa-window-close{
   position: relative;
-  left: 200px;
+  left: 150px;
 }
 
 .fa-arrow-right{

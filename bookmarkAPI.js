@@ -1,6 +1,7 @@
 'use strict';
-/*global $*/
+/*global */
 
+// eslint-disable-next-line no-unused-vars
 const API = (function (){
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/kristof-pierre/bookmarks';
 
@@ -50,7 +51,6 @@ const API = (function (){
   };
   //there mightb e a problem with my headres
   const createBookmark = function(newBookmark){
-    console.log(newBookmark);
     const options = {
       method: 'POST',
       headers: {

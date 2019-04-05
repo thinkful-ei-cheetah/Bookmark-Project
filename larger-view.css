@@ -6,6 +6,7 @@
 .js-bookmark-large{
   width: 350px;
   padding: 10px;
+  height: 250px;
  
 }
 
@@ -48,11 +49,12 @@
 
 .description-text{
   height: 100px;
-  word-wrap: break-word
+  word-wrap: break-word;
+  font-size: 20px;
 }
 
 .additional-info{
-  height: 200px;
+  height: 300px;
   width: 328px;
 }
 
