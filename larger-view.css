@@ -17,6 +17,8 @@
 .js-logo-large{
   border: none;
   padding: 0px 0px;
+  height: 50px;
+  max-width: 60px;
 }
 
 .js-large-info{
@@ -63,10 +65,19 @@
   width: 328px;
   margin-top: 25px;
   margin-bottom: 0px;
-  word-wrap: break-word
+  word-wrap: break-word;
 }
 
 .interact-btns{
   display: flex;
+  margin-left: 60px;
+}
+
+.more-btns{
+  position: relative;
+  
+  background-color: white;
+  font-size: 15px;
+  border: none;
 }
 

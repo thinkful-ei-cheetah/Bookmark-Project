@@ -9,7 +9,9 @@ const BookmarkController = (function(){
     handleAddButtonClicked();
     handleExitFormClicked();
     handleSearching();
-    handleFilterRatings()
+    handleFilterRatings();
+    handleKeyboard();
+    handledeleteBookmarkClick();
   };
 
 
@@ -23,7 +25,12 @@ const BookmarkController = (function(){
       const enteredURL = $('.url-entry').val();
       const enteredTitle = $('.title-entry').val();
       const enteredDes = $('.add-bookmark-textArea').val();
-      const rating = null;
+      const rating = $('#ratings option:selected').val();
+
+      $('.url-entry').val('');
+      $('.title-entry').val('');
+      $('.add-bookmark-textArea').val('');
+      $('#ratings option:selected').val('');
   
       try{
        
@@ -34,11 +41,24 @@ const BookmarkController = (function(){
             Store.addBookmark(newBookmark);
             BookmarkController.render();
           })
-          .catch( e=> BookmarkController.renderError(e));
+          .catch( e=> {
+            Store.setError(e);
+            BookmarkController.render(e);
+          });
       } catch (e){
-        renderError(e);
+        Store.setError(e);
+        BookmarkController.render();
       }
     });  
+  };
+
+  const handleKeyboard = function(){
+    $('section').on('keyup', '.bookmark', function (e){
+      console.log(e);
+      if (e.originalEvent.keyCode === 32 || e.originalEvent.keyCode === 13){
+        bookmarkEngaged(this);
+      }
+    });
   };
 
   //Close form when x is clicked
@@ -63,16 +83,17 @@ const BookmarkController = (function(){
   //Switch to large view of each bookmark
   const handleBookmarkClick = function(){
     $('section').on('click', '.bookmark', function(e) {
-      const selected = $(this);
-      const unselected = $('.bookmark').not(selected);
-  
-      if (!selected.hasClass('selected')){
-        maximize(selected);
-        minimize(unselected);
-      }
       
+      bookmarkEngaged(this);
     });
   };
+
+  function bookmarkEngaged(bookmark){
+    const selected = $(bookmark);
+    const selectedId = getId(selected);
+    Store.setExpand(selectedId);
+    BookmarkController.render();
+  }
 
   const handleFilterRatings = function(){
     $('#filter-ratings').change(e=>{
@@ -89,8 +110,17 @@ const BookmarkController = (function(){
   };
 
   const handledeleteBookmarkClick = function (){
-    $('section').on('click', '.bookmark', function(e) {
-      //nothing yet
+    $('section').on('click', '.delete-btn', function(e) {
+      const itemId = $(this).closest('.bookmark').attr('id');
+      API.deleteBookmark(itemId)
+        .then(()=>{
+          Store.deleteBookmark(itemId);
+          BookmarkController.render();
+        })
+        .catch( e => {
+          Store.setError(e);
+          BookmarkController.render();
+        });
     });
   };
 
@@ -101,70 +131,9 @@ const BookmarkController = (function(){
       render();
     });
   };
-
-  //Below functions manipulate the DOM
-  const maximize = function(item){
-    item.addClass('js-bookmark-large selected');
-    item.find('.small-to-large').addClass('js-small-to-large-large');
-    item.find('.js-mini-info').removeClass('mini-info').addClass('js-large-info');
-    item.find('.logo-container').addClass('js-logo-container-large');
-    item.find('.logo').addClass('js-logo-large');
-    item.find('.logo').attr('width', '60px');
-    item.find('.name').addClass('js-name-large');
-    
-    addAdditionalDetails(item);
-  };
-  
-  const minimize = function(item){
-    item.removeClass('selected');
-    item.removeClass('js-bookmark-large');
-    item.find('.js-small-to-large-large').removeClass('js-small-to-large-large').addClass('small-to-large');
-    item.find('.js-large-info').addClass('js-mini-info').removeClass('js-large-info');
-    item.find('.logo-container').removeClass('js-logo-container-large');
-    item.find('.logo').removeClass('js-logo-large');
-    item.find('.logo').attr('width', '170px');
-    item.find('.name').removeClass('js-name-large');
-  
-    removeAdditionalDetails(item);
-  };
-  
-  const addAdditionalDetails = function(item){
-    item.find('.js-small-to-large-large').append('<span class="interact-btns"><i class="fas fa-trash fa-lg"></i><i class="fas fa-pencil-alt fa-lg"></i></span');
-    const id = getId(item);
-    item.append(generateAdditionalInfo(id));
-  };
   
   const getId = function(item){
     return item.attr('id');
-  };
-  
-  const removeAdditionalDetails = function(item){
-    item.find('.interact-btns').remove();
-    item.find('.additional-info').remove();
-  };
-  
-  const generateAdditionalInfo = function(id){
-    const bookmarkDetails = Store.findBookmarkDetails(id);
-  
-    const shortVersion = `
-    <div class="additional-info">
-      <div class="description-text-full">
-        <p>${bookmarkDetails.description}</p>
-      </div>
-      <div class="go-btn"><a  href="#"><i class="fas fa-arrow-circle-right fa-3x"></i></a>
-      </div>
-    </div>`;
-  
-    const longVersion = `  
-    <div class="additional-info">
-      <div class="description-text">
-        <p>${bookmarkDetails.desc}</p>
-      </div>
-      <div class="go-btn"><a  href="${bookmarkDetails.url}"><i class="fas fa-arrow-circle-right fa-3x"></i></a>
-      </div>
-    </div>`;
-  
-    return bookmarkDetails.urlLength > 20 ? shortVersion : longVersion;
   };
 
   //Input validation
@@ -182,37 +151,58 @@ const BookmarkController = (function(){
   };
 
 
-  //Render errors or store
-  const renderError = function(error){
-    $('.show-error').append(`<div class="error"> ${error.message} </div>`);
-    setTimeout(()=> {$('.error').remove();}, 6000);
-  };
+  //Render errors or store NEED TO FIX
 
   const render = function(){
-    let bookmarks = [...Store.bookmarks];
 
-    if (Store.ratingFilter){
-      bookmarks = bookmarks.filter( bookmark => bookmark.rating >= Store.ratingFilter);
+    if(Store.error){
+      $('.show-error').append(`<div class="error"> ${Store.error.message} </div>`);
+      Store.error = null;
+      setTimeout(()=> {$('.error').remove();}, 6000);
+    } else{
+      let bookmarks = [...Store.bookmarks];
+
+      if (Store.ratingFilter){
+        bookmarks = bookmarks.filter( bookmark => bookmark.rating >= Store.ratingFilter);
+      }
+
+      if(Store.searchTerm){
+        bookmarks = bookmarks.filter( bookmark => bookmark.title.toLowerCase().includes(Store.searchTerm.toLowerCase()));
+      }
+
+      $('section').html(createBookmarkString(bookmarks));
     }
-
-    if(Store.searchTerm){
-      bookmarks = bookmarks.filter( bookmark => bookmark.title.toLowerCase().includes(Store.searchTerm.toLowerCase()));
-    }
-    $('section').html(createBookmarkString(bookmarks));
-
   };
 
   const createBookmarkString = function (bookmarkArray){
-    let htmlString =bookmarkArray.map( (bookmark,index) => generateBookmarkHTML(bookmark, index));
-  
+    let htmlString =bookmarkArray.map( bookmark => generateBookmarkHTML(bookmark));
     return htmlString.join('');
-
   };
 
-  const generateBookmarkHTML = function (bookmark, index){
+  const generateBookmarkHTML = function (bookmark){
     let imgURL = bookmark.url.match(/[\w]*\.com|[\w]*\.edu|[\w]*\.org|[\w]*\.io|[\w]*\.it|[\w]*\.br|[\w]*\.ca|[\w]*\.net|[\w]*\.co\.uk/);
-    console.log(imgURL);
-    return `<div class="bookmark" id="${bookmark.id}" role="listitem" tabIndex = "0">
+    
+    let rating = '';
+    switch(bookmark.rating){
+    case 1: 
+      rating = '⭐★★★★';
+      break;
+    case 2: 
+      rating = '⭐⭐★★★';
+      break;
+    case 3: 
+      rating = '⭐⭐⭐★★';
+      break;
+    case 4: 
+      rating = '⭐⭐⭐⭐★';
+      break;
+    case 5: 
+      rating = '⭐⭐⭐⭐⭐';
+      break;
+    }
+  
+    if (!bookmark.isExpanded){
+      return `<div class="bookmark" id="${bookmark.id}" role="listitem" tabIndex = "0">
     <div class="small-to-large">
       <div class="logo-container">
         <img class= "logo" src="//logo.clearbit.com/${imgURL[0]}" onerror="if (this.src != 'error.jpg') this.src = 'https://placedog.net/170/170'" alt="logo">
@@ -220,20 +210,44 @@ const BookmarkController = (function(){
       <div class="js-mini-info">
         <h4 class="name">${bookmark.title}</h4>
         <span class="star-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+          ${rating}
         </span>
       </div>
     </div>
-  </div>`;
+    </div>`;
+    }
+
+    return `
+  <div class="bookmark js-bookmark-large selected" id="${bookmark.id}" role="listitem" tabIndex="0">
+    <div class="small-to-large js-small-to-large-large">
+      <div class="logo-container js-logo-container-large">
+        <img class="logo js-logo-large" src="//logo.clearbit.com/${imgURL[0]}" onerror="if (this.src != 'error.jpg') this.src = 'https://placedog.net/170/170'" alt="logo">
+      </div>
+      <div class="js-mini-info js-large-info">
+        <h4 class="name js-name-large">${bookmark.title}</h4>
+        <span class="star-rating">
+          ${rating}
+        </span>
+      </div>
+      <span class="interact-btns">
+        <input type="button" value="&#xf303; " class="edit-btn more-btns fa fa-input">
+        <input type="button" value="&#xf2ed; " class="delete-btn more-btns fa fa-input">
+      </span>
+    </div>
+    <div class="additional-info">
+      <div class="description-text">
+        <p>${bookmark.desc}</p>
+      </div>
+      <div class="go-btn">
+        <a href="${bookmark.url}"><i class="fas fa-arrow-circle-right fa-3x"></i></a>
+      </div>
+    </div>
+  </div>`;   
+
   };
 
   return{
     initializeHandlers,
-    renderError,
     handleBookmarkClick,
     handleAddButtonClicked,
     handleSubmit,

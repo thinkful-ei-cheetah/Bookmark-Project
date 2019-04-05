@@ -21,30 +21,31 @@
     </header>
 
     <form class ="search" role="form">
-      <input type="text" role="searchbox" name="search-box" placeholder="Search..." id="search-box">
-      <div class="show-error"></div>
+      <input type="text" aria-label="search box" role="searchbox" name="search-box" placeholder="Search..." id="search-box">
+      <div class="show-error" aria-labelledby=""></div>
       <button class="add-item">+ Add Bookmark</button>
     </form>
 
 
     <div class="add-form-container">
       <form class="add-bookmark" role="form">
-        <i class="far fa-window-close fa-2x"></i>
+        <input type="button" value="&#xf410; " class="fa-window-close fa fa-input">
         <label for="url-entry">URL</label>
         <br>
-        <input type= "text" class="url-entry" placeholder="www....">
+        <input type= "text" class="url-entry" placeholder="http://....">
         <br>
         <label for="rating-box"></label>
         <br>
-        <div class="rating-box" id="rating">
-          <span class="star-rating">
-            <i class="fas fa-star star-selected"></i>
-            <i class="fas fa-star star-selected"></i>
-            <i class="fas fa-star star-selected"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </span>
-        </div> 
+        <div class="select-rating">
+            <label for="ratings">Rating:</label>
+            <select name="-selectratings" id="ratings">
+              <option value="">⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+          </div>
         <div class="additional-info-form">
             <label for="text-entry"></label>
             <br>
@@ -53,7 +54,7 @@
             <textarea class="add-bookmark-textArea" maxlength="130" rows="5" name="description" placeholder="This webiste is for..." cols="35"></textarea>
         </div>
         <div class="go-btn">
-          <button><a  href="#"><i class="add-new-item-btn fas fa-arrow-right fa-3x"></i></a></button>
+          <button><a  href="#" tabindex="-1"><i class="add-new-item-btn fas fa-arrow-right fa-3x"></i></a></button>
         </div>
       </form>  
     </div>
@@ -68,7 +69,7 @@
         <option value="5">⭐⭐⭐⭐⭐</option>
       </select>
     </div>
-    <section role="list" class= "bookmark-container">
+    <section aria-label="bookmark container" class= "bookmark-container">
     </section>
 
     <a class="logo-info" href="https://clearbit.com">Logos provided by Clearbit</a>
@@ -82,36 +83,3 @@
     <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
-<!-- 
-<div class=" js-bookmark-large bookmark" id="b30dk5d" role="listitem">
-    <div class="js-small-to-large-large">
-      <div class="logo-container js-logo-container-large">
-        <img class="logo js-logo-large" src="https://placedog.net/60/60" alt="logo">
-      </div>
-      <div class="js-large-info">
-        <h4 class="js-name-large">Spotify</h4>
-        <span class="star-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </span>
-      </div>
-      <i class="fas fa-trash fa-lg"></i>
-    </div>
-    <div class="additional-info">
-      <div class="description-text">
-        <p>ipsfffffs</p>
-      </div>
-      <div class="url-text">
-        <p>ipxxxxxxxxxxxxxxxxxs</p>
-      </div>
-
-      <div class="go-btn"><a  href="#"><i class="fas fa-arrow-circle-right fa-3x"></i>
-
-      </a></div>
-      
-    </div>
-    
-  </div> -->

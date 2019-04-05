@@ -25,7 +25,7 @@ const API = (function (){
           };
 
           if(!res.headers.get('content-type').includes('json')){
-            error.message = res.statusText;
+            error.message = 'Server error: ' + res.statusText;
             return Promise.reject(error);
           }  
         }
@@ -37,7 +37,7 @@ const API = (function (){
       //this section handles all returned OBJECT possibilities
       .then(data =>{
         if(error){
-          error.message = data.message;
+          error.message = 'Server error: ' + data.message;
           return Promise.reject(error);
         }
         //if no errors at all we make it here
@@ -70,7 +70,7 @@ const API = (function (){
       },
       body: update
     };
-    return fetch(BASE_URL + id, options);
+    return listAPIFetch(BASE_URL + id, options);
   };
 
   const deleteBookmark = function(id){
@@ -80,7 +80,7 @@ const API = (function (){
         'Content-Type': 'json'
       },
     };
-    return fetch(BASE_URL + id, options);
+    return listAPIFetch(BASE_URL + '/' + id, options);
   };
 
   return {

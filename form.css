@@ -25,7 +25,8 @@ textarea{
 }
 .add-bookmark{
 margin: 0 auto;
-  max-width: 350px;
+  width: 350px;
+
   margin: 0 auto;
   border: 2px solid black;
   background-color: white;
@@ -34,10 +35,16 @@ margin: 0 auto;
   box-shadow: 4px 4px grey;
   display: none;
 }
+.fa-input {
+  font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
 .fa-window-close{
   position: relative;
   left: 150px;
+  background-color: white;
+  font-size: 25px;
+  border: none;
 }
 
 .fa-arrow-right{

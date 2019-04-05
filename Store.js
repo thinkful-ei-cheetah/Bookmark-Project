@@ -12,13 +12,13 @@ const Store = (function (){
   ];
   let searchTerm = '';
   let ratingFilter = null;
+  let error = null;
 
   const findBookmarkDetails = function (id){
     return this.bookmarks.find(item => item.id === id);
   };
 
   const addBookmark = function(newBookmark){
-    console.log(newBookmark)
     Store.bookmarks.unshift(newBookmark);
   };
 
@@ -30,7 +30,22 @@ const Store = (function (){
     Store.ratingFilter = value;
   };
 
-  let isExpanded = null
+  const setExpand = function (id){
+    Store.bookmarks.forEach(bookmark => {
+      if (bookmark.id === id){
+        bookmark.isExpanded = true;
+      } else bookmark.isExpanded = false;
+    });
+  };
+
+  const setError = function (error){
+    Store.error = error;
+  };
+
+  const deleteBookmark = function (id){
+    const bookmarkIndex= Store.bookmarks.findIndex(bookmark => bookmark.id === id);
+    Store.bookmarks.splice(bookmarkIndex,1);
+  };
 
   return{
     bookmarks,
@@ -40,8 +55,9 @@ const Store = (function (){
     searchTerm,
     setRatingFilter,
     ratingFilter,
+    setExpand,
+    error,
+    setError,
+    deleteBookmark,
   };
 }() );
-
-
-console.log('Spotify is a Swedish audio streaming platform that provides DRM-protected music and podcasts from record labels and media companies. DRM-protected music and podcasts from record labels and media.'.length);

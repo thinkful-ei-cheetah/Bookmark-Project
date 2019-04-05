@@ -27,6 +27,9 @@ h1{
 #search-box:focus{
   border: 2px solid black;
 }
+body{
+  min-width: 420px;
+}
 
 .logo-info{
     color: grey;
