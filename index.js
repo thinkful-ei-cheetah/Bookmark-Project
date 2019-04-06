@@ -11,8 +11,12 @@ function init(){
 
   API.getBookmarks()
     .then(bookmarks => {
+      
       bookmarks.forEach(bookmark => Store.addBookmark(bookmark));
       BookmarkController.render();
     })
-    .catch((e)  =>BookmarkController.renderError(e));
+    .catch((e)  =>{
+      Store.error = e;
+      BookmarkController.render();  
+    });
 }

@@ -51,7 +51,20 @@ const Store = (function (){
     Store.bookmarks.splice(bookmarkIndex,1);
   };
 
+  const setUpdate = function(id){
+    const bookmark= Store.bookmarks.find(bookmark => bookmark.id === id);
+    Store.updateId = id;
+    Store.updateButtonPressed = bookmark;
+  };
+
+  const updateBookmark = function(id =updateId, obj){
+    const bookmark= Store.bookmarks.find(bookmark => bookmark.id === id);
+    Object.assign(bookmark, obj);
+  };
+
   let addButtonPressed = false;
+  let updateButtonPressed = null;
+  let updateId = null;
 
   return{
     bookmarks,
@@ -67,5 +80,10 @@ const Store = (function (){
     deleteBookmark,
     addButtonPressed,
     currentExpanded,
+    updateButtonPressed,
+    setUpdate,
+    updateBookmark,
+    updateId
+
   };
 }() );
