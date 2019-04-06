@@ -243,7 +243,7 @@ const BookmarkController = (function(){
   };
 
   const generateAddBookmarkForm = function(){
-    return `<form class="add-bookmark" role="form">
+    return `<form aria-live="add form popped up" class="add-bookmark" role="form">
     <input type="button" value="&#xf410; " class="fa-window-close fa fa-input">
     <label for="url-entry">URL</label>
     <br>
@@ -277,7 +277,7 @@ const BookmarkController = (function(){
 
   const generateEditBookmarkForm = function(bookmark){
 
-    return `<form class="edit-bookmark" role="form">
+    return `<form aria-live="Edit form popped up" class="edit-bookmark" role="form">
     <input type="button" value="&#xf410; " class="fa-window-close fa fa-input">
     <label for="url-entry">URL</label>
     <br>
@@ -312,6 +312,8 @@ const BookmarkController = (function(){
   const generateBookmarkHTML = function (bookmark){
     console.log(bookmark);
     let imgURL = bookmark.url.match(/[\w]*\.com|[\w]*\.edu|[\w]*\.org|[\w]*\.io|[\w]*\.it|[\w]*\.br|[\w]*\.ca|[\w]*\.net|[\w]*\.co\.uk/);
+
+    if (imgURL === null || imgURL === undefined) imgURL === '';
     
     let rating = '';
     switch(bookmark.rating){
