@@ -1,7 +1,6 @@
 'use strict';
 const Store = (function (){
-  const bookmarks = []
-  ];
+  const bookmarks = [];
   let searchTerm = '';
   let ratingFilter = null;
   let error = null;
