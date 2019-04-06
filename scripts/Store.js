@@ -1,14 +1,6 @@
 'use strict';
 const Store = (function (){
-  const bookmarks = [
-    {
-      title: 'Spotify',
-      description: 'Spotify is a Swedish audio streaming platform that provides DRM-protected music and podcasts from record labels and media companies. DRM-protected music and podcasts from record labels and media.',
-      url: 'www.Spotify.com',
-      rating: 5,
-      id: 'a30dk5d',
-      
-    },
+  const bookmarks = []
   ];
   let searchTerm = '';
   let ratingFilter = null;
