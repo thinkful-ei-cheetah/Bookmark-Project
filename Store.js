@@ -31,12 +31,16 @@ const Store = (function (){
   };
 
   const setExpand = function (id){
+    Store.currentExpanded = id;
     Store.bookmarks.forEach(bookmark => {
+      
       if (bookmark.id === id){
         bookmark.isExpanded = true;
       } else bookmark.isExpanded = false;
     });
   };
+
+  let currentExpanded = '6';
 
   const setError = function (error){
     Store.error = error;
@@ -46,6 +50,8 @@ const Store = (function (){
     const bookmarkIndex= Store.bookmarks.findIndex(bookmark => bookmark.id === id);
     Store.bookmarks.splice(bookmarkIndex,1);
   };
+
+  let addButtonPressed = false;
 
   return{
     bookmarks,
@@ -59,5 +65,7 @@ const Store = (function (){
     error,
     setError,
     deleteBookmark,
+    addButtonPressed,
+    currentExpanded,
   };
 }() );

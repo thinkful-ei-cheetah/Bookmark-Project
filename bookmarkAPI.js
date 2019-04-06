@@ -38,6 +38,7 @@ const API = (function (){
       .then(data =>{
         if(error){
           error.message = 'Server error: ' + data.message;
+          console.log(error);
           return Promise.reject(error);
         }
         //if no errors at all we make it here

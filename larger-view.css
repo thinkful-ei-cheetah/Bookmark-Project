@@ -71,6 +71,7 @@
 .interact-btns{
   display: flex;
   margin-left: 60px;
+  z-index: 1;
 }
 
 .more-btns{
